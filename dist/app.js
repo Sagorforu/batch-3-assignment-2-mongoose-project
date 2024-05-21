@@ -7,8 +7,6 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const port = 3000;
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("This is project mongoose - assignment 2");
 });
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
+exports.default = app;
