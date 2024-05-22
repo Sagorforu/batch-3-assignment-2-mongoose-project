@@ -3,6 +3,7 @@ import { productController } from './products.controller';
 
 const router = express.Router();
 
-router.post('/products', productController.createProduct);
+router.post('/', productController.createProduct);
+router.get('/', productController.allProducts);
 
 export const ProductRoutes = router;
