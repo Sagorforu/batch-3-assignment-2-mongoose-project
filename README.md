@@ -1,6 +1,6 @@
 ## Assignment-2-b3-Mongoose-project
 
-live link:
+live link: https://assignment-2-mongoose-project.vercel.app/
 
 ## Features
 
