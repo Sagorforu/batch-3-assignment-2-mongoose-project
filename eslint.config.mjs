@@ -20,4 +20,7 @@ export default tseslint.config(
       'no-console': 'warn',
     },
   },
+  {
+    ignores: ['**/node_modules/', '**/dist/'],
+  },
 );

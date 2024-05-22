@@ -6,8 +6,8 @@
   "scripts": {
     "start:prod": "node ./dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
-    "eslint": "npx eslint src",
-    "eslint:fix": "npx eslint src --fix",
+    "eslint": "npx eslint .",
+    "eslint:fix": "npx eslint . --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
     "prettier:fix": "npx prettier --write src",
     "test": "echo \"Error: no test specified\" && exit 1"
