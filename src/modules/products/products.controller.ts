@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
 import { productServices } from './products.services';
+import productZodValidationSchema from './products.zod.validation';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productBody = req.body;
-    const result = await productServices.createProductIntoDB(productBody);
+    const zodParsedData = productZodValidationSchema.parse(productBody);
+    const result = await productServices.createProductIntoDB(zodParsedData);
     res.status(200).json({
       success: true,
       message: 'Product created successfully!',
@@ -12,8 +14,8 @@ const createProduct = async (req: Request, res: Response) => {
     });
   } catch (error) {
     res.status(500).json({
-      success: true,
-      message: 'Product could not created!',
+      success: false,
+      message: 'Product not created!',
       error: error,
     });
   }
@@ -31,7 +33,7 @@ const allProducts = async (req: Request, res: Response) => {
     if (result && result.length === 0) {
       res.status(404).json({
         success: false,
-        message: 'There is no product in database!!',
+        message: 'Products not found',
         data: null,
       });
     } else {
@@ -43,8 +45,8 @@ const allProducts = async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(500).json({
-      success: true,
-      message: 'Products could not fetched',
+      success: false,
+      message: 'Products not fetched',
       error: error,
     });
   }
@@ -62,14 +64,14 @@ const singleProduct = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({
         success: false,
-        message: 'Product does not exist in database',
+        message: 'product not found',
         data: null,
       });
     }
   } catch (error) {
     res.status(500).json({
-      success: true,
-      message: 'Product could not fetched',
+      success: false,
+      message: 'Product not found',
       error: error,
     });
   }
@@ -91,14 +93,14 @@ const updateProduct = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({
         success: false,
-        message: 'Product does not exist in database',
+        message: 'Product not found',
         data: null,
       });
     }
   } catch (error) {
     res.status(500).json({
-      success: true,
-      message: 'Product could not update',
+      success: false,
+      message: 'Product not found',
       error: error,
     });
   }
@@ -117,14 +119,14 @@ const deleteProduct = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({
         success: false,
-        message: 'Product does not exist in database',
+        message: 'Product not found',
         data: null,
       });
     }
   } catch (error) {
     res.status(500).json({
-      success: true,
-      message: 'Product could not fetched',
+      success: false,
+      message: 'Product not found',
       error: error,
     });
   }
